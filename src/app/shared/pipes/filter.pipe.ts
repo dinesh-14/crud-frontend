@@ -15,7 +15,7 @@ export class FilterPipe implements PipeTransform {
         ele['email'].toLowerCase().includes(searchText) ||
         ele['roleType'].toLowerCase().includes(searchText) ||
         ele['status'].toLowerCase().includes(searchText) ||
-        ele['mobile'].toLowerCase().includes(searchText);
+        (ele['mobile'] ? ele['mobile'].toLowerCase().includes(searchText) : false);
     });
   }
 }

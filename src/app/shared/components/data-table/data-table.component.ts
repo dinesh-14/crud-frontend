@@ -45,7 +45,7 @@ export class DataTableComponent implements OnInit {
       name: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
       roleType: ['Admin', [Validators.required]],
-      mobile: [null, [Validators.required, Validators.pattern(VALIDATORS.NUMBER)]]
+      mobile: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern(VALIDATORS.NUMBER)]]
     });
   }
 
