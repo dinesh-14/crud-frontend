@@ -7,7 +7,6 @@ export const USER_COLS = [
     { isEdit: true, key: 'actions', label: '' }
 ];
 
-
 export const VALIDATORS = {
     NUMBER: '^[0-9]*$',
 };
@@ -15,7 +14,6 @@ export const VALIDATORS = {
 export const VALIDATION_MESSAGES = {
     EMPTY_FIELD_MSG: 'Invalid entry'
 };
-
 
 export const ROLE_TYPE_LIST = [
     { value: 'Admin', label: 'Admin', checked: false, isActive: true },

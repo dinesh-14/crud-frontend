@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { USER_COLS } from 'src/app/globals';
 import { Subscription } from 'rxjs';
+// services
+import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
+// globals
+import { USER_COLS } from 'src/app/globals';
 
 @Component({
   selector: 'app-users',
@@ -19,9 +21,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   // data to be sent to the table
   columns: object = USER_COLS;
   data = [];
-
-  // open modal
-  isModal: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -76,14 +75,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         );
         break;
     }
-  }
-
-  onCancel(ev) {
-    this.isModal = false;
-  }
-
-  onSubmit(ev) {
-    this.isModal = false;
   }
 
   ngOnDestroy() {

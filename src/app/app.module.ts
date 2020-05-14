@@ -23,7 +23,7 @@ import { AlertService } from './shared/services/alert.service';
     AppComponent,
     HeaderComponent,
     DashboardComponent,
-    SessionManagerComponent
+    SessionManagerComponent,
   ],
   imports: [
     BrowserModule,

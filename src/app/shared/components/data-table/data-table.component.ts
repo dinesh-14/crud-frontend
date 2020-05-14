@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { USER_COLS, VALIDATORS, VALIDATION_MESSAGES, ROLE_TYPE_LIST } from 'src/app/globals';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+// globals
+import { VALIDATORS, VALIDATION_MESSAGES, ROLE_TYPE_LIST } from 'src/app/globals';
 
 @Component({
   selector: 'app-data-table',

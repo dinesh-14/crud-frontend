@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { AlertService } from './shared/services/alert.service';
 import { debounceTime } from 'rxjs/operators';
+
+// services
+import { AlertService } from './shared/services/alert.service';
 
 @Component({
   selector: 'app-root',
