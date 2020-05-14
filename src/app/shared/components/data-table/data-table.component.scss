@@ -1,0 +1,90 @@
+@import "../../../../assets/variables.scss";
+
+body {
+    color: $secondary-color !important;
+}
+
+// custom scrollbar
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #d3d3d361;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #d3d3d361;
+}
+
+.container-fluid {
+    background-color: $table-bg !important;
+    input {
+        box-shadow: none !important;
+    }
+    .input-group-btn {
+        outline: none !important;
+    }
+
+    table.scrolldown {
+        width: 100%;
+        border-spacing: 0;
+    }
+
+    table.scrolldown tbody,
+    table.scrolldown thead {
+        display: block;
+        float: left;
+        clear: left;
+    }
+
+    table.scrolldown tbody {
+        height: 65.6vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    thead {
+        border-top: 1px solid #d3d3d361;
+    }
+    tbody {
+        tr {
+            border-top: 1px solid #d3d3d361;
+            border-bottom: 1px solid #d3d3d361;
+        }
+        tr:nth-child(even) {
+            background-color: $table-row-color;
+        }
+    }
+    th,
+    td {
+        color: $secondary-color !important;
+        padding: 0.75rem;
+        width: 25%;
+    }
+    // tbody td,
+    // thead th {
+    //     // width: 260px;
+    //     width: 25%;
+    // }
+    .img-width-sm {
+        width: 10px !important;
+    }
+}
+.modal-content {
+    border-radius: 0 !important;
+}
+
+button {
+    &:focus {
+        outline: none !important;
+    }
+}

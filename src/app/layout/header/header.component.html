@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light header-bg">
+    <img class="img-width" src="{{SVG_BASEPATH}}assets/icons/Logo.svg" alt="Brand Logo">
+    <div class="mx-4 font-12" *ngFor="let item of headerItems">
+        <a [routerLink]="item.route" [routerLinkActive]="['active-route']">
+            <img class="img-width-lg" [src]="item.svgUrl" [alt]="item.alt">
+            <span class="ml-2">
+                {{item.label}}
+            </span>
+        </a>
+    </div>
+    <div class="ml-auto">
+        <img class="mr-3 img-width-lg" src="{{SVG_BASEPATH}}assets/icons/ico_notification.svg" alt="ico_notification">
+        <img class="mx-1 img-width-lg" src="{{SVG_BASEPATH}}assets/icons/ico_user.svg" alt="user_svg">
+        <span class="mx-1 font-12">John Smith</span>
+        <img class="ml-3 img-width" src="{{SVG_BASEPATH}}assets/icons/ico_downarrow.svg" alt="ico_downarrow">
+    </div>
+</nav>

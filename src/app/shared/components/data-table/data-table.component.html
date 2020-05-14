@@ -1,0 +1,165 @@
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-md-12 px-4 py-2">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-7">
+                    <img src="{{SVG_BASEPATH}}assets/icons/ico_users.svg" alt="users_icon">
+                    <span class="ml-2 font-22">Users</span>
+                </div>
+                <div class="col-md-3 px-0">
+                    <div class="input-group border">
+                        <input type="text" class="form-control border-0 py-0" placeholder="Search" name="search"
+                            [(ngModel)]="filterString">
+                        <div class="input-group-btn py-0 d-flex">
+                            <button class="btn btn-default py-0" type="submit">
+                                <img src="{{SVG_BASEPATH}}assets/icons/ico_search.svg" alt="search_icon">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-right">
+                    <button class="custom-btn font-10" (click)="open(content, 'add', {})">
+                        <img class="mr-1 img-width-sm" src="{{SVG_BASEPATH}}assets/icons/ico_add.svg" alt="add_icon">
+                        Add User
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="w-100 scrolldown">
+                <thead class="w-100">
+                    <ng-container *ngFor="let col of columns">
+                        <th scope="col" *ngIf="col.isSort" class="pointer" (click)="onSort()">
+                            {{col.label | uppercase}}
+                            <img class="ml-1" src="{{SVG_BASEPATH}}assets/icons/ico_sorting.svg" alt="add_icon">
+                        </th>
+                        <th scope="col" *ngIf="!col.isSort">
+                            {{col.label | uppercase}}
+                        </th>
+                    </ng-container>
+                    <th></th>
+                </thead>
+                <tbody class="w-100" *ngIf="data && data.length > 0;else noData">
+                    <ng-container *ngFor="let item of data | sortPipe: sortBy : sortOn  | filter: filterString">
+                        <tr>
+                            <ng-container *ngFor="let col of columns ">
+                                <td *ngIf="col.key !== 'actions' && col.key !== 'status'">
+                                    {{item[col.key]}}
+                                </td>
+                                <td *ngIf="col.key === 'status'">
+                                    <img class="mr-2 default-cursor" [src]="getStatusIcon(item[col.key])"
+                                        [alt]="item[col.key]">
+                                    {{item[col.key]}}
+                                </td>
+                                <td class="text-center pr-4" *ngIf="col.key === 'actions'">
+                                    <img src="{{SVG_BASEPATH}}assets/icons/ico_edit.svg" alt="edit icon"
+                                        (click)="open(content, 'edit', item)">
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData>
+    <div style="height:74vh">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <label>NO DATA FOUND</label>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header px-5" style="border-radius: 0px !important;">
+        <span class="modal-title font-24" id="modal-basic-title">
+            {{modalType === 'edit' ? 'EDIT USER' : 'ADD USER'}}
+        </span>
+
+        <button type="button" class="bg-transparent border-0 font-16" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <img src="{{SVG_BASEPATH}}assets/icons/ico_close.svg" alt="close_icon">
+        </button>
+    </div>
+    <div class="modal-body px-5">
+        <form [formGroup]="form">
+            <div class="input-group border my-2">
+                <input type="text" formControlName="name" class="form-control border-0 py-0" placeholder="Name">
+            </div>
+            <p class="text-danger mt-n2 font-12 ml-1" *ngIf="form.controls['name'].invalid && ( form.controls['name'].dirty || 
+            form.controls['name'].touched)">
+                {{getValidationMessages()}}
+            </p>
+            <div class="input-group border my-2">
+                <input type="email" formControlName="email" class="form-control border-0 py-0" placeholder="Email">
+            </div>
+            <p class="text-danger mt-n2 font-12 ml-1" *ngIf="form.controls['email'].invalid && ( form.controls['email'].dirty || 
+            form.controls['email'].touched)">
+                {{getValidationMessages()}}
+            </p>
+            <div class="input-group my-2">
+                <div *ngFor="let item of roleTypeList;let i=index;"
+                    class="custom-btn-radio custom-control custom-radio custom-control-inline">
+                    <div *ngIf="item.isActive">
+                        <input class="custom-control-input" formControlName="roleType" type="radio" [id]="item.value"
+                            [value]="item.value">
+                        <label class="custom-control-label pointer" [for]="item.value">{{item.label}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group border my-2">
+                <input type="text" formControlName="mobile" class="form-control border-0 py-0"
+                    placeholder="Mobile Number (Optional)">
+            </div>
+            <p class="text-danger mt-n2 font-12 ml-1" *ngIf="form.controls['mobile'].invalid && ( form.controls['mobile'].dirty || 
+            form.controls['mobile'].touched)">
+                {{getValidationMessages()}}
+            </p>
+        </form>
+    </div>
+    <div class="modal-footer px-5 border-0">
+        <div class="input-group  my-2 d-flex justify-content-between">
+            <button [disabled]="!form.valid" class="custom-btn" [ngClass]="modalType === 'edit' ? 'w-45' : 'w-100'"
+                (click)="modal.close('Save click')">
+                {{modalType === 'edit' ? 'EDIT USER' : 'ADD USER'}}
+            </button>
+            <button [disabled]="!form.valid" class="custom-btn w-45" *ngIf="modalType === 'edit'"
+                (click)="onConfirm(confirm , 'delete')">
+                DELETE USER
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+
+
+
+<ng-template #confirm let-modal>
+    <div class="modal-header px-5" style="border-radius: 0px !important;">
+        <span class="modal-title font-24" id="modal-basic-title">
+            Confirmation
+        </span>
+        <button type="button" class="bg-transparent border-0 font-16" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <img src="{{SVG_BASEPATH}}assets/icons/ico_close.svg" alt="close_icon">
+        </button>
+    </div>
+    <div class="modal-body px-5">
+        <div class="row">
+            <div class="col-md-12">
+                Are you sure you want to delete this user ?
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer px-5 border-0">
+        <div class="input-group my-2">
+            <button class="custom-btn w-100" (click)="modal.close('Save click')">
+                DELETE USER
+            </button>
+        </div>
+    </div>
+</ng-template>

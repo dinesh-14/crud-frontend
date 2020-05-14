@@ -1,0 +1,32 @@
+@import "../../../assets/variables.scss";
+
+.header-bg {
+    background-color: $primary-color;
+    color: $default-text;
+    height: 60px;
+    .img-width {
+        width: 6%;
+    }
+    .img-width-xl {
+        width: 16%;
+    }
+    .img-width-lg {
+        width: 20px;
+    }
+}
+
+.active-route {
+    color: $tertiary-color;
+    fill: $tertiary-color;
+}
+
+a {
+    color: white;
+}
+svg {
+    stroke: red !important;
+}
+
+svg:hover {
+    stroke: green !important;
+}
